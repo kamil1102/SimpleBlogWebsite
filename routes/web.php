@@ -30,3 +30,9 @@ Route::delete('posts/{id}', 'PostController@destroy') ->name('posts.destroy');
 
 
 
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
