@@ -31,6 +31,10 @@ Route::post('comments', 'CommentController@store') ->name('comments.store');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 Route::patch('/posts/{post}', 'PostController@update')->name('posts.update');
 
+Route::get('/comments/{comment}/edit/{id}', 'CommentController@edit')->name('comments.edit');
+Route::patch('/comments/{comment}', 'CommentController@update')->name('comments.update');
+
+
 
 Auth::routes();
 

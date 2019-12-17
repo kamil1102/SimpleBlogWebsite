@@ -15,7 +15,7 @@
                         <hr />
                         <h4>Display Comments</h4>
 
-                        @include('posts.displayComments', ['comments' => $post->comments, 'post_id' => $post->id])
+                        @include('posts.displayComments', ['comments' => $post->comments, 'post' => $post])
 
                         <hr />
                         <h4>Add comment</h4>
@@ -35,6 +35,7 @@
                             @method('DELETE')
                             <button type="submit">Delete</button>
                         </form>
+
 
                     </div>
                 </div>

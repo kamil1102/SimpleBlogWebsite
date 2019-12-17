@@ -26,8 +26,9 @@
                                     <h4 class="card-title">{{$post->title}}</h4>
                                     <p class="card-text">{{$post->body}} </p>
                                     <a href="{{route('posts.show',['id'=>$post->id])}}" class="btn btn-primary">Read More</a>
-
+                                    @can('update-post', $post)
                                     <a href="{{route('posts.edit',['post'=>$post])}}" class="btn btn-primary">Edit Post</a>
+                                    @endcan
                                 </div>
                             </div>
 

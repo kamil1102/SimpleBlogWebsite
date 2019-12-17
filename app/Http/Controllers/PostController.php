@@ -100,7 +100,7 @@ class PostController extends Controller
         $p = Post::findOrFail($id);
         $p->title = $validatedData['title'];
         $p->body = $validatedData['body'];
-        $p->user_id = Auth::id();
+
         $p->save();
         session()->flash('success','Post was updated.');
 

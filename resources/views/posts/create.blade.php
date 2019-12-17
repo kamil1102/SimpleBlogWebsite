@@ -15,7 +15,7 @@
 
                 <h1>Create post</h1>
 
-                <form method="POST" action="{{ route('posts.store') }}">
+                <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title <span class="require">*</span></label>
@@ -26,10 +26,12 @@
                         <label for="description">Description</label>
                         <textarea rows="5" class="form-control" name ="body" value="{{old('body')}}" ></textarea>
                     </div>
+                    <input type="file" name="image" class="form-control">
 
                     <div class="form-group">
                         <p><span class="require">*</span> - required fields</p>
                     </div>
+
 
 
                     <div class="form-group">
