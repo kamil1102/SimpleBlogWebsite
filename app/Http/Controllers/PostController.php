@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
-use App\User;
+use App\Tag;
+
+
 
 class PostController extends Controller
 {
     /**
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('posts.index',['posts'=> $posts]);
     }
 
@@ -26,6 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
+
         return view('posts.create');
     }
 
@@ -41,15 +46,15 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             ]);
-        
+
 
          $p = new Post;
          $p->title = $validatedData['title'];
          $p->body = $validatedData['body'];
-         $p->user_id = User::inrandomOrder()->first()->id;
+         $p->user_id = Auth::id();
          $p->save();
+         session()->flash('success','Post was created.');
 
-         session()->flash('message','Post was created.');
          return redirect()->route('posts.index');
 
     }
@@ -72,9 +77,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post )
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -86,7 +91,21 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required|max:255',
+        ]);
+
+
+        $p = Post::findOrFail($id);
+        $p->title = $validatedData['title'];
+        $p->body = $validatedData['body'];
+        $p->user_id = Auth::id();
+        $p->save();
+        session()->flash('success','Post was updated.');
+
+        return redirect()->route('posts.index');
+
     }
 
     /**
@@ -99,7 +118,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+        session()->flash('error','Post was deleted.');
 
-        return redirect()->route('posts.index')->with('message','Post was deleted.');
+        return redirect()->route('posts.index');
     }
 }

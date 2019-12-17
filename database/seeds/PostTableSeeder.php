@@ -13,6 +13,6 @@ class PostTableSeeder extends Seeder
     public function run()
     {
         //Call post factory to create 100 posts.
-        factory(App\Post::class,100)->create();
+        factory(App\Post::class,10)->create();
     }
 }

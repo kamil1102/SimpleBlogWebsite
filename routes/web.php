@@ -24,15 +24,20 @@ Route::get('posts/create', 'PostController@create') ->name('posts.create');
 Route::post('posts', 'PostController@store') ->name('posts.store');
 Route::get('posts/{id}', 'PostController@show') ->name('posts.show');
 Route::delete('posts/{id}', 'PostController@destroy') ->name('posts.destroy');
+Route::post('comments', 'CommentController@store') ->name('comments.store');
 
 
 
-
-
-
-
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+Route::patch('/posts/{post}', 'PostController@update')->name('posts.update');
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function (){
+    Route::resource('users','UsersController',['except'=>['show','create','store']]);
+
+});

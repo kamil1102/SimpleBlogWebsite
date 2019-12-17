@@ -1,8 +1,6 @@
 
 @extends('layouts.app')
 
-@section('title', 'Create Post')
-
 @section('content')
 
 
@@ -15,34 +13,27 @@
 
                 <h1>Create post</h1>
 
-                <form method="POST" action="{{ route('posts.store') }}">
-                    @csrf
+                <form method="POST" action="{{ route('posts.update',['post'=>$post])}}">
+                    {{ csrf_field() }}
+                    {{ method_field('PATCH') }}
                     <div class="form-group">
                         <label for="title">Title <span class="require">*</span></label>
-                        <input type="text" class="form-control" name="title" value="{{old('title')}}" />
+                        <input type="text" class="form-control" name="title" value="{{$post->title}}" />
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea rows="5" class="form-control" name ="body" value="{{old('body')}}" ></textarea>
+                        <textarea rows="5" class="form-control" name ="body">{{$post->body}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <p><span class="require">*</span> - required fields</p>
                     </div>
 
-
                     <div class="form-group">
 
-
-
                         <button type="submit" class="btn btn-primary">
-                            Create
-                        </button>
-                        <a href="{{route('posts.index')}}" class="btn btn-primary">Read More</a>
-
-                        <button class="btn btn-default" action = "{{route('posts.index')}}">
-                            Cancel
+                            Update
                         </button>
                     </div>
 

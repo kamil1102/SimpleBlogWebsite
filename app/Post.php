@@ -12,9 +12,12 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    // This function returns comments that are assigned to the post. 
+    // This function returns comments that are assigned to the post.
     public function comments()
     {
         return $this->hasMany('App\Comment');
     }
+
+
+
 }
