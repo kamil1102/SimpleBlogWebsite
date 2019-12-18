@@ -11,14 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('posts', function () {
-    return view('posts');
-});
 
+
+Route::get('/', 'PostController@index') ->name('posts.index');
 Route::get('posts', 'PostController@index') ->name('posts.index');
 Route::get('posts/create', 'PostController@create') ->name('posts.create');
 Route::post('posts', 'PostController@store') ->name('posts.store');
@@ -31,9 +27,9 @@ Route::post('comments', 'CommentController@store') ->name('comments.store');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 Route::patch('/posts/{post}', 'PostController@update')->name('posts.update');
 
-Route::get('/comments/{comment}/edit/{id}', 'CommentController@edit')->name('comments.edit');
+Route::get('/comments/{comment}', 'CommentController@edit')->name('comments.edit');
 Route::patch('/comments/{comment}', 'CommentController@update')->name('comments.update');
-
+Route::delete('comment/{id}', 'commentController@destroy') ->name('comment.destroy');
 
 
 Auth::routes();

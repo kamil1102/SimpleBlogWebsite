@@ -26,7 +26,7 @@
                         <label for="description">Description</label>
                         <textarea rows="5" class="form-control" name ="body" value="{{old('body')}}" ></textarea>
                     </div>
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" name="featured_image" class="form-control">
 
                     <div class="form-group">
                         <p><span class="require">*</span> - required fields</p>

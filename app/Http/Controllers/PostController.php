@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
@@ -11,6 +12,10 @@ use App\Tag;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      *
      * Display a listing of the resource.
@@ -52,6 +57,17 @@ class PostController extends Controller
          $p->title = $validatedData['title'];
          $p->body = $validatedData['body'];
          $p->user_id = Auth::id();
+
+         if($request->hasFile('featured_image')){
+             $image = $request->file('featured_image');
+             $filename = time() . '.' . $image->getClientOriginalExtension();
+             $location = public_path('images/' . $filename);
+             Image::make($image)->resize(1000,500)->save($location);
+
+             $p->image = $filename;
+
+
+         }
          $p->save();
          session()->flash('success','Post was created.');
 

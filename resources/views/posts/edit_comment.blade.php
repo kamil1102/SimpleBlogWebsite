@@ -11,13 +11,13 @@
 
                 <h1>Create post</h1>
 
-                <form method="POST" action="{{ route('comments.update',['comment'=>$comment])}}">
+                <form method="POST" action="{{ route('comments.update',['comment'=> $comment])}}">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea rows="5" class="form-control" name ="body">{{$post->body}}</textarea>
+                        <textarea rows="5" class="form-control" name ="body">{{$comment->body}}</textarea>
                     </div>
 
                     <div class="form-group">

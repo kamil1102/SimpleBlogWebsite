@@ -11,34 +11,45 @@
 
 @section('content')
     <p>This is my body content.</p>
-    <ul>
+
+    <a href="{{route('posts.create')}}" class="btn btn-primary">Create New Post</a>
+    <p> </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"><p class="h4">Title</p></th>
+            <th scope="col"><p class="h4">Author</p></th>
+            <th scope="col"><p class="h4">Date Posted</p></th>
+            <th scope="col"><p class="h4">Handle</p></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
         @foreach ($posts as $post)
 
-            <section>
-                <div class="container py-3">
-                    <div class="card">
-                        <div class="row ">
-                            <div class="col-md-4">
-                                <img src="https://www.seowordpress.pl/wp-content/uploads/2014/10/blog.jpg" class="w-100">
-                            </div>
-                            <div class="col-md-8 px-3">
-                                <div class="card-block px-3">
-                                    <h4 class="card-title">{{$post->title}}</h4>
-                                    <p class="card-text">{{$post->body}} </p>
-                                    <a href="{{route('posts.show',['id'=>$post->id])}}" class="btn btn-primary">Read More</a>
-                                    @can('update-post', $post)
-                                    <a href="{{route('posts.edit',['post'=>$post])}}" class="btn btn-primary">Edit Post</a>
-                                    @endcan
-                                </div>
-                            </div>
+            <tr>
+                <td>{{$post->title}}
+                    @can('update-post', $post)
 
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        <form method="POST"
+                              action="{{route('posts.destroy',['id' => $post->id])}}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-link" type="submit">Delete</button>
+                            <a href="{{route('posts.edit',['post'=>$post])}}" class="btn btn-link">Edit</a>
+                        </form>
+                    @endcan</td>
+                <td>{{$post->user->name}}</td>
+                <td>{{$post->created_at}}</td>
+                <td>
 
+
+                        <a href="{{route('posts.show',['id'=>$post->id])}}" class="btn btn-primary">Read More</a>
+                </td>
+            </tr>
         @endforeach
-        {{ $posts ->links()}}
-    </ul>
-    <a href="{{route('posts.create')}}">Create New Post</a>
+        </tbody>
+    </table>
+
 @endsection
