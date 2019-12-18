@@ -20,7 +20,7 @@
             </li>
             <li class="nav-item">
                 <form method="POST"
-                      action="{{route('comment.destroy',['id' => $comment->id])}}">
+                      action="{{route('comment.destroy',['comment' => $comment])}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-link" type="submit">Delete</button>

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+
+
+
                 <div class="card">
-                    <div class="card-header">Users </div>
+                    <div class="card-header"> Registered Users  </div>
 
                     <div class="card-body">
                             <table class="table">
@@ -27,17 +27,12 @@
                                         <td>{{$user->email}}</td>
                                         <td>{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
                                         <td>
+                                            <a href="{{route('admin.users.edit',$user->id)}}"><button class="btn btn-primary">Edit User Role</button></a>
 
-                                            <a href="{{route('admin.users.edit',$user->id)}}"><button type="button" class="btn btn-primary loat-left">Edit</button></a>
-
-                                                <form action="{{route('admin.users.destroy',$user->id)}}" method="POST" class = "float-left">
-                                                @csrf
+                                            <form action="{{route('admin.users.destroy',$user->id)}}" method="POST" class = "float-left">@csrf
                                                 {{method_field('DELETE')}}
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-
-
-
                                         </td>
                                         </tr>
                                     @endforeach
@@ -48,7 +43,7 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+
+
 @endsection

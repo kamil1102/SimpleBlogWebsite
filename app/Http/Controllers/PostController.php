@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index','show']]);
     }
     /**
      *
@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(6);
         return view('posts.index',['posts'=> $posts]);
     }
 
@@ -81,9 +81,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
         return view('posts.show',['post'=> $post]);
     }
 
@@ -105,7 +104,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
@@ -113,11 +112,11 @@ class PostController extends Controller
         ]);
 
 
-        $p = Post::findOrFail($id);
-        $p->title = $validatedData['title'];
-        $p->body = $validatedData['body'];
 
-        $p->save();
+        $post->title = $validatedData['title'];
+        $post->body = $validatedData['body'];
+
+        $post->save();
         session()->flash('success','Post was updated.');
 
         return redirect()->route('posts.index');
@@ -127,12 +126,13 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
         $post->delete();
         session()->flash('error','Post was deleted.');
 

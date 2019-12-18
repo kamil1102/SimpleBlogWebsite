@@ -13,6 +13,7 @@
     <p>This is my body content.</p>
 
     <a href="{{route('posts.create')}}" class="btn btn-primary">Create New Post</a>
+
     <p> </p>
     <table class="table">
         <thead>
@@ -33,7 +34,7 @@
                     @can('update-post', $post)
 
                         <form method="POST"
-                              action="{{route('posts.destroy',['id' => $post->id])}}">
+                              action="{{route('posts.destroy',['post' => $post])}}">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-link" type="submit">Delete</button>
@@ -45,11 +46,12 @@
                 <td>
 
 
-                        <a href="{{route('posts.show',['id'=>$post->id])}}" class="btn btn-primary">Read More</a>
+                        <a href="{{route('posts.show',['post'=>$post])}}" class="btn btn-primary">Read More</a>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+    {!!$posts->links() !!}
 
 @endsection
