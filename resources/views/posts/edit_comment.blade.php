@@ -9,7 +9,7 @@
 
             <div class="col-md-8 col-md-offset-2">
 
-                <h1>Create post</h1>
+                <h1>Edit Comment</h1>
 
                 <form method="POST" action="{{ route('comments.update',['comment'=> $comment])}}">
                     {{ csrf_field() }}

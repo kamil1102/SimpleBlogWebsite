@@ -11,7 +11,7 @@
 
             <div class="col-md-8 col-md-offset-2">
 
-                <h1>Create post</h1>
+                <h1>Edit post</h1>
 
                 <form method="POST" action="{{ route('posts.update',['post'=>$post])}}">
                     {{ csrf_field() }}

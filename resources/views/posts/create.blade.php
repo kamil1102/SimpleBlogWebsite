@@ -23,12 +23,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Description<span class="require">*</span></label>
                         <textarea rows="5" class="form-control" name ="body" value="{{old('body')}}" ></textarea>
                     </div>
                     <div class="form-group">
                         <label for="category"> Category (one word)<span class="require">*</span></label>
-                        <input type="text" class="form-control" name="category"  />
+                        <input type="text" class="form-control" name="category" value="{{old('category')}}"  />
                     </div>
 
                     <input type="file" name="featured_image" class="form-control">
