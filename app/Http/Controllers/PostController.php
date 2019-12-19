@@ -49,7 +49,7 @@ class PostController extends Controller
     {
          $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'body' => 'required|max:255',
+            'body' => 'required',
             ]);
 
 
@@ -62,7 +62,7 @@ class PostController extends Controller
              $image = $request->file('featured_image');
              $filename = time() . '.' . $image->getClientOriginalExtension();
              $location = public_path('images/' . $filename);
-             Image::make($image)->resize(1000,500)->save($location);
+             Image::make($image)->resize(1080,400)->save($location);
 
              $p->image = $filename;
 
@@ -84,6 +84,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show',['post'=> $post]);
+    }
+
+    public function apiPresent($id)
+    {
+
+        $post = Post::findOrFail($id);
+        return $post;
     }
 
     /**
@@ -108,7 +115,7 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'body' => 'required|max:255',
+            'body' => 'required',
         ]);
 
 

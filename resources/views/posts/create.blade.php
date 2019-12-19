@@ -32,20 +32,13 @@
                         <p><span class="require">*</span> - required fields</p>
                     </div>
 
-
-
                     <div class="form-group">
-
-
 
                         <button type="submit" class="btn btn-primary">
                             Create
                         </button>
-                        <a href="{{route('posts.index')}}" class="btn btn-primary">Read More</a>
+                        <a href="{{route('posts.index')}}" class="btn btn-link">Cancel</a>
 
-                        <button class="btn btn-default" action = "{{route('posts.index')}}">
-                            Cancel
-                        </button>
                     </div>
 
                 </form>

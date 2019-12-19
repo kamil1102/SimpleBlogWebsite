@@ -1,6 +1,4 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 @extends('layouts.app')
 
 @section('title', 'My Posts')
@@ -10,7 +8,6 @@
 @endif
 
 @section('content')
-    <p>This is my body content.</p>
 
     <a href="{{route('posts.create')}}" class="btn btn-primary">Create New Post</a>
 
@@ -18,13 +15,15 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"><p class="h4">Title</p></th>
-            <th scope="col"><p class="h4">Author</p></th>
+            <th scope="col"><p class="h4">Title of the post</p></th>
+            <th scope="col"><p class="h4">Posted By</p></th>
             <th scope="col"><p class="h4">Date Posted</p></th>
-            <th scope="col"><p class="h4">Handle</p></th>
+            <th scope="col"><p class="h4">Read</p></th>
         </tr>
         </thead>
         <tbody>
+
+
 
 
         @foreach ($posts as $post)
