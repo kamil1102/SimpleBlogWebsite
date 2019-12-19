@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Tag;
+use App\Category;
 
 
 
@@ -50,6 +51,7 @@ class PostController extends Controller
          $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+             'category' =>'required',
             ]);
 
 
@@ -65,10 +67,14 @@ class PostController extends Controller
              Image::make($image)->resize(1080,400)->save($location);
 
              $p->image = $filename;
-
-
          }
+
+         $category = new Category;
+         $category->body = $validatedData['category'];
          $p->save();
+         $p->category() ->save($category);
+
+
          session()->flash('success','Post was created.');
 
          return redirect()->route('posts.index');

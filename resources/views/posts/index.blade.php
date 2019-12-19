@@ -18,6 +18,7 @@
             <th scope="col"><p class="h4">Title of the post</p></th>
             <th scope="col"><p class="h4">Posted By</p></th>
             <th scope="col"><p class="h4">Date Posted</p></th>
+            <th scope="col"><p class="h4">Category</p></th>
             <th scope="col"><p class="h4">Read</p></th>
         </tr>
         </thead>
@@ -42,6 +43,7 @@
                     @endcan</td>
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->created_at}}</td>
+                <td>{{$post->category->body}}</td>
                 <td>
 
 
