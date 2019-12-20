@@ -1,16 +1,7 @@
-
 @extends('layouts.app')
 
-@section('title', 'My Posts')
-
-@if(session('message'))
-    <p><b>{{session('message')}}</b></p>
-@endif
-
 @section('content')
-
     <a href="{{route('posts.create')}}" class="btn btn-primary">Create New Post</a>
-
     <p> </p>
     <table class="table">
         <thead>
@@ -23,16 +14,10 @@
         </tr>
         </thead>
         <tbody>
-
-
-
-
         @foreach ($posts as $post)
-
             <tr>
                 <td>{{$post->title}}
                     @can('update-post', $post)
-
                         <form method="POST"
                               action="{{route('posts.destroy',['post' => $post])}}">
                             @csrf
@@ -45,14 +30,11 @@
                 <td>{{$post->created_at}}</td>
                 <td>{{$post->category->body}}</td>
                 <td>
-
-
-                        <a href="{{route('posts.show',['post'=>$post])}}" class="btn btn-primary">Read More</a>
+                    <a href="{{route('posts.show',['post'=>$post])}}" class="btn btn-primary">Read More</a>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
     {!!$posts->links() !!}
-
 @endsection

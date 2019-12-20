@@ -10,7 +10,7 @@
         <div class="card-body">
             <p>Posted by <b>{{ $comment->user->name }}</b> at  {{ $comment->created_at }} </p>
 
-            <p>{{ $comment->body }}.</p>
+            <p>{{ $comment->body }}</p>
 
         </div>
         @can('update-comment',$comment)

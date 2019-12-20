@@ -6,6 +6,7 @@
         <div class="container">
 
             <h1 class="display-4">{{ $post->title }}</h1>
+            <p>Posted by <b>{{ $post->user->name }}</b> at  {{ $post->created_at }} </p>
             <img src="{{asset('images/' . $post->image)}}">
             <div class="card">
                 <div class="card-body">
